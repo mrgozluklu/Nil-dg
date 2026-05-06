@@ -33,24 +33,18 @@
 </div>
 
 <script>
-    function checkPass() {
+   function checkPass() {
         const pass = document.getElementById('passInput').value;
-        // ŞİFREYİ BURADAN DEĞİŞTİR:
+        // ŞİFRE DOĞRUYSA CANVA SİTESİNE IŞINLA:
         if (pass === "05.02.2025") { 
             document.getElementById('password-screen').style.opacity = '0';
             setTimeout(() => {
-                document.getElementById('password-screen').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                document.body.style.overflow = 'auto';
+                // BURAYA KENDİ CANVA LİNKİNİ YAPIŞTIR:
+                window.location.href = "https://niluferim-my.canva.site/tasarimin"; 
             }, 500);
         } else {
             alert("Yanlış şifre, bir daha düşün!");
         }
-    }
-
-    function toggleNote(card) {
-        const note = card.querySelector('.hidden-note');
-        note.style.display = note.style.display === 'block' ? 'none' : 'block';
     }
 </script>
 
