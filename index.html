@@ -25,24 +25,11 @@
     <button onclick="checkPass()">Aç Bakalım</button>
 </div>
 
-<div id="main-content">
-    <h1>İyi Ki Doğdun Birtanem! 🫀</h1>
-    <p>Bu site sadece senin için, sana özel yapıldı.</p>
-    
-    <div class="card" onclick="toggleNote(this)">
-        <h3>🎁 Kutuyu Tıkla</h3>
-        <p class="hidden-note">İçindeki Not: Seninle geçen her gün benim için bir hediye. Seni çok seviyorum!</p>
-    </div>
-
-    <div class="card" onclick="toggleNote(this)">
-        <h3>📸 İlk Fotoğrafımız</h3>
-        <p class="hidden-note">Hala o günkü gibi bakıyorum sana... (Buraya fotoğraf linki de ekleyebilirsin)</p>
-    </div>
-
-    <div class="card" onclick="toggleNote(this)">
-        <h3>🍕 En Sevdiğin Yemek</h3>
-        <p class="hidden-note">Söz veriyorum, bu akşam ne istersen o! Kuponun burada.</p>
-    </div>
+<div id="main-content" style="padding: 0; overflow: hidden;">
+    <iframe src="https://niluferim.my.canva.site/" 
+            style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;" 
+            allowfullscreen>
+    </iframe>
 </div>
 
 <script>
