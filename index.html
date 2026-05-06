@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sana Bir Sürprizim Var ❤️</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #fce4ec; text-align: center; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        #password-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ff80ab; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: 0.5s; }
+        input { padding: 15px; border-radius: 10px; border: none; font-size: 1.2rem; margin-top: 10px; text-align: center; }
+        button { padding: 10px 20px; margin-top: 10px; background: #c51162; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        #main-content { display: none; padding: 20px; overflow-y: auto; height: 100vh; width: 100%; }
+        .card { background: white; padding: 20px; margin: 20px auto; border-radius: 15px; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor: pointer; transition: 0.3s; }
+        .card:hover { transform: scale(1.05); }
+        .hidden-note { display: none; margin-top: 10px; color: #ad1457; font-style: italic; }
+        h1 { color: #c51162; }
+    </style>
+</head>
+<body>
+
+<div id="password-screen">
+    <h1>Giriş Yap Kaptan!</h1>
+    <p>Sadece bizim bildiğimiz o özel tarih? (Örn: 2024)</p>
+    <input type="password" id="passInput" placeholder="Şifreyi Gir...">
+    <button onclick="checkPass()">Aç Bakalım</button>
+</div>
+
+<div id="main-content">
+    <h1>İyi Ki Doğdun Hatun! ❤️</h1>
+    <p>Bu site sadece senin için, sana özel yapıldı.</p>
+    
+    <div class="card" onclick="toggleNote(this)">
+        <h3>🎁 Kutuyu Tıkla</h3>
+        <p class="hidden-note">İçindeki Not: Seninle geçen her gün benim için bir hediye. Seni çok seviyorum!</p>
+    </div>
+
+    <div class="card" onclick="toggleNote(this)">
+        <h3>📸 İlk Fotoğrafımız</h3>
+        <p class="hidden-note">Hala o günkü gibi bakıyorum sana... (Buraya fotoğraf linki de ekleyebilirsin)</p>
+    </div>
+
+    <div class="card" onclick="toggleNote(this)">
+        <h3>🍕 En Sevdiğin Yemek</h3>
+        <p class="hidden-note">Söz veriyorum, bu akşam ne istersen o! Kuponun burada.</p>
+    </div>
+</div>
+
+<script>
+    function checkPass() {
+        const pass = document.getElementById('passInput').value;
+        // ŞİFREYİ BURADAN DEĞİŞTİR:
+        if (pass === "1234") { 
+            document.getElementById('password-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('password-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.body.style.overflow = 'auto';
+            }, 500);
+        } else {
+            alert("Yanlış şifre reis, tekrar dene!");
+        }
+    }
+
+    function toggleNote(card) {
+        const note = card.querySelector('.hidden-note');
+        note.style.display = note.style.display === 'block' ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
