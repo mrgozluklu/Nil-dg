@@ -5,129 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sana Bir Sürprizim Var ❤️</title>
     <style>
-        /* Şifre Ekranı Tasarımı */
-        body { font-family: 'Arial', sans-serif; background-color: #fce4ec; margin: 0; overflow: hidden; }
-        #password-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ff80ab; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: 0.8s; }
-        input { padding: 15px; border-radius: 10px; border: none; font-size: 1.2rem; margin-top: 10px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        button { padding: 12px 25px; margin-top: 15px; background: #c51162; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
-        button:hover { background: #ad1457; transform: scale(1.05); }
-
-        /* Ana İçerik Tasarımı (Kızıl-Kahve Arka Plan) */
-        #main-content { 
-            display: none; 
-            background-color: #8D5651; 
-            height: 100vh; 
-            width: 100%; 
-            position: relative; 
-            overflow: hidden; 
-            display: none; /* JS ile açılacak */
-        }
-
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            width: 100%;
-            position: relative;
-        }
-
-        /* Polaroid Fotoğraflar */
-        .polaroid {
-            background: white;
-            padding: 12px 12px 50px 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            width: 250px;
-            border-radius: 2px;
-            position: absolute;
-            transition: 0.5s;
-        }
-
-        .polaroid img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .left-photo { left: 8%; top: 15%; transform: rotate(-6deg); }
-        .right-photo { right: 8%; bottom: 15%; transform: rotate(6deg); }
-
-        /* Neon Yazı Efekti */
-        .neon-text {
-            text-align: center;
-            color: white;
-            z-index: 10;
-        }
-
-        .neon-text h1 {
-            font-size: 3.8rem;
-            margin: 0;
-            font-weight: normal;
-            font-family: 'Brush Script MT', cursive;
-            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00de, 0 0 40px #ff00de, 0 0 60px #ff00de;
-        }
-
-        /* Arka Plan Kare Deseni (Canva Havası) */
-        .overlay {
-            position: absolute;
-            top:0; left:0; width:100%; height:100%; 
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
-            pointer-events: none;
-        }
-
-        /* Mobil Ayarı */
-        @media (max-width: 768px) {
-            .polaroid { width: 150px; }
-            .polaroid img { height: 150px; }
-            .neon-text h1 { font-size: 2rem; }
-        }
+        body { font-family: 'Arial', sans-serif; background-color: #fce4ec; text-align: center; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
+        #password-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ff80ab; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: 0.5s; }
+        input { padding: 15px; border-radius: 10px; border: none; font-size: 1.2rem; margin-top: 10px; text-align: center; }
+        button { padding: 10px 20px; margin-top: 10px; background: #c51162; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        #main-content { display: none; padding: 20px; overflow-y: auto; height: 100vh; width: 100%; }
+        .card { background: white; padding: 20px; margin: 20px auto; border-radius: 15px; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor: pointer; transition: 0.3s; }
+        .card:hover { transform: scale(1.05); }
+        .hidden-note { display: none; margin-top: 10px; color: #ad1457; font-style: italic; }
+        h1 { color: #c51162; }
     </style>
 </head>
 <body>
 
 <div id="password-screen">
-    <h1 style="color: white; text-align: center; padding: 0 20px;">Bu Siteye Sadece Nilüferim Girebilir!</h1>
-    <p style="color: #c51162; font-weight: bold;">Özel Tarihimiz? (GG.AA.YYYY)</p>
-    <input type="text" id="passInput" placeholder="05.02.2025">
+    <h1>Giriş Yap Bakalım!</h1>
+    <p>Sadece bizim bildiğimiz o özel tarih? (Örn: 01.01.2020)</p>
+    <input type="password" id="passInput" placeholder="Şifreyi Gir...">
     <button onclick="checkPass()">Aç Bakalım</button>
 </div>
 
 <div id="main-content">
-    <div class="overlay"></div>
-    <div class="container">
-        
-        <div class="polaroid left-photo">
-            <img src="https://i.ibb.co/4gFfM0MG/IMG-20251221-165016.jpg" alt="Nilüfer">
-        </div>
+    <h1>İyi Ki Doğdun Hatun! ❤️</h1>
+    <p>Bu site sadece senin için, sana özel yapıldı.</p>
+    
+    <div class="card" onclick="toggleNote(this)">
+        <h3>🎁 Kutuyu Tıkla</h3>
+        <p class="hidden-note">İçindeki Not: Seninle geçen her gün benim için bir hediye. Seni çok seviyorum!</p>
+    </div>
 
-        <div class="neon-text">
-            <h1>İyi ki Doğdun</h1>
-            <h1>Birtanem!</h1>
-        </div>
+    <div class="card" onclick="toggleNote(this)">
+        <h3>📸 İlk Fotoğrafımız</h3>
+        <p class="hidden-note">Hala o günkü gibi bakıyorum sana... (Buraya fotoğraf linki de ekleyebilirsin)</p>
+    </div>
 
-        <div class="polaroid right-photo">
-            <img src="https://i.ibb.co/hRhxs5Gw/20251221-165515.jpg" alt="Alperen">
-        </div>
-
+    <div class="card" onclick="toggleNote(this)">
+        <h3>🍕 En Sevdiğin Yemek</h3>
+        <p class="hidden-note">Söz veriyorum, bu akşam ne istersen o! Kuponun burada.</p>
     </div>
 </div>
 
 <script>
-    function checkPass() {
+function checkPass() {
         const pass = document.getElementById('passInput').value;
-        // Şifre: 05.02.2025
+        // ŞİFRE DOĞRUYSA CANVA SİTESİNE IŞINLA:
         if (pass === "05.02.2025") { 
-            const screen = document.getElementById('password-screen');
-            const main = document.getElementById('main-content');
-            
-            screen.style.opacity = '0';
+            document.getElementById('password-screen').style.opacity = '0';
             setTimeout(() => {
-                screen.style.display = 'none';
-                main.style.display = 'block';
-                document.body.style.backgroundColor = '#8D5651';
-            }, 800);
+                // BURAYA KENDİ CANVA LİNKİNİ YAPIŞTIR:
+                window.location.href = "https://niluferim-my.canva.site/tasarimin"; 
+            }, 500);
         } else {
-            alert("Yanlış şifre reis, bir daha düşün! (Format: GG.AA.YYYY)");
+            alert("Yanlış şifre, bir daha düşün!");
         }
     }
 </script>
