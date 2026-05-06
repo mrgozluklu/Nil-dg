@@ -19,14 +19,14 @@
 <body>
 
 <div id="password-screen">
-    <h1>Giriş Yap Kaptan!</h1>
-    <p>Sadece bizim bildiğimiz o özel tarih? (Örn: 2024)</p>
+    <h1>Bu Siteye Sadece Nilüferim Girebilir!</h1>
+    <p>Sadece bizim bildiğimiz o özel tarih? (örn: 01.01.2000)</p>
     <input type="password" id="passInput" placeholder="Şifreyi Gir...">
     <button onclick="checkPass()">Aç Bakalım</button>
 </div>
 
 <div id="main-content">
-    <h1>İyi Ki Doğdun Hatun! ❤️</h1>
+    <h1>İyi Ki Doğdun Birtanem! 🫀</h1>
     <p>Bu site sadece senin için, sana özel yapıldı.</p>
     
     <div class="card" onclick="toggleNote(this)">
@@ -49,7 +49,7 @@
     function checkPass() {
         const pass = document.getElementById('passInput').value;
         // ŞİFREYİ BURADAN DEĞİŞTİR:
-        if (pass === "1234") { 
+        if (pass === "05.02.2025") { 
             document.getElementById('password-screen').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('password-screen').style.display = 'none';
