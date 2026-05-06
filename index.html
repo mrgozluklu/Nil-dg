@@ -55,17 +55,16 @@
 <script>
    function checkPass() {
         const pass = document.getElementById('passInput').value;
-        // ŞİFRE DOĞRUYSA CANVA SİTESİNE IŞINLA:
+        // ŞİFREYİ BURADAN DEĞİŞTİR:
         if (pass === "05.02.2025") { 
             document.getElementById('password-screen').style.opacity = '0';
             setTimeout(() => {
-                // BURAYA KENDİ CANVA LİNKİNİ YAPIŞTIR:
-                window.location.href = "https://niluferim.my.canva.site/"; 
+                document.getElementById('password-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                document.body.style.overflow = 'auto';
             }, 500);
         } else {
-            alert("Yanlış şifre, bir daha düşün!");
-        }
-    }
+            alert("Yanlış şifre, bir daha dene!");
 </script>
 
 </body>
