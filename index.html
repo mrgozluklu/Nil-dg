@@ -6,133 +6,151 @@
     <title>Girlfriend Quest: Birtanemin Doğum Günü Seviyesi! ❤️</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* Ana Stil Ayarları */
         body { 
-            font-family: 'Press Start 2P', cursive; /* Retro/Pixelated Yazı Tipi */
-            background-color: #fce4ec; 
-            text-align: center; 
+            font-family: 'Press Start 2P', cursive; 
+            background-color: #000; 
             margin: 0; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
             height: 100vh; 
             overflow: hidden; 
             transition: background-color 0.8s ease; 
+            /* Yüksek çözünürlüklü ekranlarda bulanıklaşmayı engeller */
+            image-rendering: -webkit-optimize-contrast;
         }
 
-        /* Şifre Ekranı (Yeni Arka Plan) */
         #password-screen { 
             position: fixed; 
             top: 0; 
             left: 0; 
             width: 100%; 
             height: 100%; 
-            /* ARKA PLANI YENİ ARCADE RESMİ YAPTIK */
+            /* ARKA PLAN RESMİNİ BURAYA KOYACAKSIN */
             background: url('https://i.ibb.co/JWqrxsTv/Chat-GPT-Image-May-7-2026-06-55-06-PM.png') center/cover no-repeat; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
             z-index: 100; 
             transition: transform 0.8s ease-in-out, opacity 0.8s ease; 
         }
 
-        /* Ortadaki UI Paneli (Tasarımı Buraya Gömelim) */
-        .ui-panel {
-            background-color: rgba(26, 26, 26, 0.95); /* Koyu Yarı-Saydam Panel */
-            border: 4px solid #c51162; /* Pixelated Kırmızı Border */
-            border-radius: 8px;
-            padding: 40px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        /* YENİ: YATAY ALT PANEL (FOTOĞRAFTAKİ GİBİ) */
+        .bottom-bar {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1000px;
+            background-color: #c51162; /* Mockup'taki pembe arka plan */
+            border-radius: 50px; /* Kenarları yuvarlatılmış */
+            padding: 15px 40px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            box-sizing: border-box;
+        }
+
+        /* Sol Taraf: Yazılar */
+        .text-group {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            max-width: 500px;
-            text-shadow: 2px 2px 0 #000;
+            text-align: left;
+            gap: 8px;
         }
 
-        /* Retro Temalı Başlık */
         .pixelated-title { 
-            color: #ffeb3b; /* Altın Sarısı Pixel Renk */
-            font-size: 1.2rem;
-            margin: 0 0 10px 0;
-            line-height: 1.5;
+            color: #ffffff;
+            font-size: 1rem;
+            margin: 0;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
         }
 
-        /* Giriş Kutusu Tasarımı */
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.6rem;
+            margin: 0;
+            font-family: 'Arial', sans-serif; /* Okunabilirliği artırmak için */
+            font-weight: bold;
+        }
+
+        /* Orta Taraf: Şifre Kutusu */
+        .input-group {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative; /* Hata mesajını konumlandırmak için */
+        }
+
         input { 
             font-family: 'Press Start 2P', cursive;
             padding: 15px; 
-            border: 2px solid #ffeb3b; /* Altın Sarısı Pixel Border */
-            border-radius: 6px; 
-            font-size: 1rem; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 0.8rem; 
             text-align: center; 
-            transition: border 0.3s; 
-            background: #1a1a1a;
-            color: #fff;
-            box-shadow: inset 0 0 5px rgba(255, 235, 59, 0.2);
-            width: 90%;
+            background: #ffffff;
+            color: #333;
+            width: 200px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+            transition: outline 0.3s;
         }
-        input:focus { outline: none; border: 2px solid #ff00de; }
-        
-        /* UIVERSE BUTON TASARIMI (Bunu Aynen Koruduk) */
+        input:focus { outline: 3px solid #ffeb3b; }
+
+        /* Sağ Taraf: Buton */
+        .btn-group {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        /* UIVERSE BUTONU */
         .uiverse-btn {
-          font-family: 'Arial', sans-serif; /* Buton içi yazı Arial olsun (Senin verdiğin gibi) */
+          font-family: 'Arial', sans-serif;
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 10px;
+          gap: 8px;
           padding: 12px 25px;
-          margin-top: 15px;
-          background-color: #c51162; /* Hot Pink */
+          background-color: #ff00de; /* Panelden farklı dursun diye neon pembe */
           color: white;
           border: none;
-          border-radius: 12px;
+          border-radius: 25px;
           cursor: pointer;
           font-weight: bold;
-          font-size: 1.1rem;
+          font-size: 1rem;
           transition: all 0.3s ease;
-          position: relative;
-          overflow: hidden;
-          box-shadow: 0 4px 15px rgba(197, 17, 98, 0.3);
-          gap: 10px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .uiverse-btn svg {
-          fill: white;
-          transition: all 0.3s ease;
-        }
-
-        .uiverse-btn .filled {
-          display: none;
-        }
-
+        .uiverse-btn svg { fill: white; transition: all 0.3s ease; }
+        .uiverse-btn .filled { display: none; }
+        
         .uiverse-btn:hover {
           background-color: white;
-          color: #c51162;
+          color: #ff00de;
           transform: translateY(-3px);
-          box-shadow: 0 6px 20px rgba(197, 17, 98, 0.4);
+          box-shadow: 0 6px 20px rgba(255, 0, 222, 0.4);
         }
-
-        .uiverse-btn:hover .empty {
-          display: none;
-        }
-
+        .uiverse-btn:hover .empty { display: none; }
         .uiverse-btn:hover .filled {
           display: block;
-          fill: #c51162;
+          fill: #ff00de;
           animation: pulse 0.6s infinite alternate;
         }
 
-        @keyframes pulse {
-          from { transform: scale(1); }
-          to { transform: scale(1.2); }
-        }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.2); } }
 
-        /* Hata Mesajı Stili */
-        #error-msg { color: #ffeb3b; font-weight: bold; margin-top: 15px; display: none; font-size: 0.8rem; }
+        /* Hata Mesajı Stili (Kutunun üstünde havada duracak) */
+        #error-msg { 
+            position: absolute;
+            top: -35px;
+            color: #ffeb3b; 
+            font-weight: bold; 
+            display: none; 
+            font-size: 0.7rem; 
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
+            white-space: nowrap;
+        }
         
-        /* Sallanma Animasyonu (Shake) */
         @keyframes shake {
             0% { transform: translateX(0); }
             25% { transform: translateX(-10px); }
@@ -141,35 +159,51 @@
             100% { transform: translateX(0); }
         }
         .shake { animation: shake 0.4s ease-in-out; }
-
-        /* Geçiş Efekti İçin Beyaz Ekran */
         .fade-out { opacity: 0; transform: scale(1.1); }
+
+        /* MOBİL EKRANLAR İÇİN DÜZELTME */
+        @media (max-width: 768px) {
+            .bottom-bar {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 20px;
+                gap: 15px;
+                bottom: 20px;
+            }
+            .text-group { text-align: center; }
+            .btn-group { justify-content: center; width: 100%; }
+        }
     </style>
 </head>
 <body>
 
 <div id="password-screen">
-    <div class="ui-panel">
-        <h1 class="pixelated-title">PASSWORD REQUIRED FOR ACCESS! 🗝️</h1>
-        <p style="color: white; font-size: 0.8rem;">SADECE BİZİM BİLDİĞİMİZ O ÖZEL TARİH? ❤️</p>
+    <div class="bottom-bar">
         
-        <div id="input-container">
+        <div class="text-group">
+            <h1 class="pixelated-title">GİRİŞ YAP BAKALIM!</h1>
+            <p class="subtitle">Sadece bizim bildiğimiz o özel tarih? ❤️</p>
+        </div>
+        
+        <div class="input-group" id="input-container">
+            <p id="error-msg">YANLIŞ OLDU, BİR DAHA DENE! 🤨</p>
             <input type="text" id="passInput" placeholder="GG.AA.YYYY" onkeypress="handleKeyPress(event)">
         </div>
         
-        <button class="uiverse-btn" onclick="checkPass()">
-            <svg class="empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
-                <path fill="none" d="M0 0H24V24H0z"></path>
-                <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2zm-3.566 15.604c.881-.556 1.676-1.109 2.42-1.701C18.335 14.533 20 11.943 20 9c0-2.36-1.537-4-3.5-4-1.076 0-2.24.57-3.086 1.414L12 7.828l-1.414-1.414C9.74 5.57 8.576 5 7.5 5 5.56 5 4 6.656 4 9c0 2.944 1.666 5.533 4.645 7.903.745.592 1.54 1.145 2.421 1.7.299.189.595.37.934.572.339-.202.635-.383.934-.571z"></path>
-            </svg>
-            <svg class="filled" height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H24V24H0z" fill="none"></path>
-                <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2z"></path>
-            </svg>
-            Aç Bakalım
-        </button>
+        <div class="btn-group">
+            <button class="uiverse-btn" onclick="checkPass()">
+                <svg class="empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="none" d="M0 0H24V24H0z"></path>
+                    <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2zm-3.566 15.604c.881-.556 1.676-1.109 2.42-1.701C18.335 14.533 20 11.943 20 9c0-2.36-1.537-4-3.5-4-1.076 0-2.24.57-3.086 1.414L12 7.828l-1.414-1.414C9.74 5.57 8.576 5 7.5 5 5.56 5 4 6.656 4 9c0 2.944 1.666 5.533 4.645 7.903.745.592 1.54 1.145 2.421 1.7.299.189.595.37.934.572.339-.202.635-.383.934-.571z"></path>
+                </svg>
+                <svg class="filled" height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0H24V24H0z" fill="none"></path>
+                    <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2z"></path>
+                </svg>
+                Aç Bakalım
+            </button>
+        </div>
 
-        <p id="error-msg">YANLIŞ OLDU, BİR DAHA DENE! 🤨</p>
     </div>
 </div>
 
@@ -187,17 +221,14 @@
         const inputCont = document.getElementById('input-container');
 
         if (pass === "05.02.2025") { 
-            // Başarılı Giriş: Ekranı yavaşça kaybet ve beyazlat (Canva'ya Geçiş)
             error.style.display = 'none';
             screen.classList.add('fade-out');
             document.body.style.backgroundColor = "white";
             
             setTimeout(() => {
-                // BURAYA KENDİ CANVA LİNKİNİ YAPIŞTIR
                 window.location.href = "https://niluferim.my.canva.site/"; 
             }, 800);
         } else {
-            // Hatalı Giriş: Sallanma efekti ve retro mesaj
             error.style.display = 'block';
             inputCont.classList.add('shake');
             
@@ -205,7 +236,7 @@
                 inputCont.classList.remove('shake');
             }, 400);
             
-            document.getElementById('passInput').value = ""; // Kutuyu temizle
+            document.getElementById('passInput').value = ""; 
         }
     }
 </script>
