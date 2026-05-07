@@ -3,23 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sana Bir Sürprizim Var ❤️</title>
+    <title>Girlfriend Quest: Birtanemin Doğum Günü Seviyesi! ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #fce4ec; text-align: center; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; transition: background-color 0.8s ease; }
-        #password-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ff80ab; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: transform 0.8s ease-in-out, opacity 0.8s ease; }
+        /* Ana Stil Ayarları */
+        body { 
+            font-family: 'Press Start 2P', cursive; /* Retro/Pixelated Yazı Tipi */
+            background-color: #fce4ec; 
+            text-align: center; 
+            margin: 0; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh; 
+            overflow: hidden; 
+            transition: background-color 0.8s ease; 
+        }
+
+        /* Şifre Ekranı (Yeni Arka Plan) */
+        #password-screen { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            /* ARKA PLANI YENİ ARCADE RESMİ YAPTIK */
+            background: url('https://i.ibb.co/hRckSydh/image-2026-05-07-183801922.png') center/cover no-repeat; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 100; 
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease; 
+        }
+
+        /* Ortadaki UI Paneli (Tasarımı Buraya Gömelim) */
+        .ui-panel {
+            background-color: rgba(26, 26, 26, 0.95); /* Koyu Yarı-Saydam Panel */
+            border: 4px solid #c51162; /* Pixelated Kırmızı Border */
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            max-width: 500px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        /* Retro Temalı Başlık */
+        .pixelated-title { 
+            color: #ffeb3b; /* Altın Sarısı Pixel Renk */
+            font-size: 1.2rem;
+            margin: 0 0 10px 0;
+            line-height: 1.5;
+        }
+
+        /* Giriş Kutusu Tasarımı */
+        input { 
+            font-family: 'Press Start 2P', cursive;
+            padding: 15px; 
+            border: 2px solid #ffeb3b; /* Altın Sarısı Pixel Border */
+            border-radius: 6px; 
+            font-size: 1rem; 
+            text-align: center; 
+            transition: border 0.3s; 
+            background: #1a1a1a;
+            color: #fff;
+            box-shadow: inset 0 0 5px rgba(255, 235, 59, 0.2);
+            width: 90%;
+        }
+        input:focus { outline: none; border: 2px solid #ff00de; }
         
-        input { padding: 15px; border-radius: 10px; border: 2px solid transparent; font-size: 1.2rem; margin-top: 10px; text-align: center; transition: border 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        input:focus { outline: none; border: 2px solid #c51162; }
-        
-        /* UIVERSE BUTON TASARIMI */
+        /* UIVERSE BUTON TASARIMI (Bunu Aynen Koruduk) */
         .uiverse-btn {
+          font-family: 'Arial', sans-serif; /* Buton içi yazı Arial olsun (Senin verdiğin gibi) */
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 10px;
           padding: 12px 25px;
-          margin-top: 20px;
-          background-color: #c51162;
+          margin-top: 15px;
+          background-color: #c51162; /* Hot Pink */
           color: white;
           border: none;
           border-radius: 12px;
@@ -30,6 +95,7 @@
           position: relative;
           overflow: hidden;
           box-shadow: 0 4px 15px rgba(197, 17, 98, 0.3);
+          gap: 10px;
         }
 
         .uiverse-btn svg {
@@ -63,8 +129,10 @@
           to { transform: scale(1.2); }
         }
 
-        #error-msg { color: #880e4f; font-weight: bold; margin-top: 15px; display: none; }
+        /* Hata Mesajı Stili */
+        #error-msg { color: #ffeb3b; font-weight: bold; margin-top: 15px; display: none; font-size: 0.8rem; }
         
+        /* Sallanma Animasyonu (Shake) */
         @keyframes shake {
             0% { transform: translateX(0); }
             25% { transform: translateX(-10px); }
@@ -73,32 +141,36 @@
             100% { transform: translateX(0); }
         }
         .shake { animation: shake 0.4s ease-in-out; }
+
+        /* Geçiş Efekti İçin Beyaz Ekran */
         .fade-out { opacity: 0; transform: scale(1.1); }
-        h1 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
 <div id="password-screen">
-    <h1>Giriş Yap Bakalım!</h1>
-    <p style="color: white;">Sadece bizim bildiğimiz o özel tarih? ❤️</p>
-    <div id="input-container">
-        <input type="text" id="passInput" placeholder="GG.AA.YYYY" onkeypress="handleKeyPress(event)">
-    </div>
-    
-    <button class="uiverse-btn" onclick="checkPass()">
-        <svg class="empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
-            <path fill="none" d="M0 0H24V24H0z"></path>
-            <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2zm-3.566 15.604c.881-.556 1.676-1.109 2.42-1.701C18.335 14.533 20 11.943 20 9c0-2.36-1.537-4-3.5-4-1.076 0-2.24.57-3.086 1.414L12 7.828l-1.414-1.414C9.74 5.57 8.576 5 7.5 5 5.56 5 4 6.656 4 9c0 2.944 1.666 5.533 4.645 7.903.745.592 1.54 1.145 2.421 1.7.299.189.595.37.934.572.339-.202.635-.383.934-.571z"></path>
-        </svg>
-        <svg class="filled" height="28" width="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0H24V24H0z" fill="none"></path>
-            <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2z"></path>
-        </svg>
-        Aç Bakalım
-    </button>
+    <div class="ui-panel">
+        <h1 class="pixelated-title">PASSWORD REQUIRED FOR ACCESS! 🗝️</h1>
+        <p style="color: white; font-size: 0.8rem;">SADECE BİZİM BİLDİĞİMİZ O ÖZEL TARİH? ❤️</p>
+        
+        <div id="input-container">
+            <input type="text" id="passInput" placeholder="GG.AA.YYYY" onkeypress="handleKeyPress(event)">
+        </div>
+        
+        <button class="uiverse-btn" onclick="checkPass()">
+            <svg class="empty" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+                <path fill="none" d="M0 0H24V24H0z"></path>
+                <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2zm-3.566 15.604c.881-.556 1.676-1.109 2.42-1.701C18.335 14.533 20 11.943 20 9c0-2.36-1.537-4-3.5-4-1.076 0-2.24.57-3.086 1.414L12 7.828l-1.414-1.414C9.74 5.57 8.576 5 7.5 5 5.56 5 4 6.656 4 9c0 2.944 1.666 5.533 4.645 7.903.745.592 1.54 1.145 2.421 1.7.299.189.595.37.934.572.339-.202.635-.383.934-.571z"></path>
+            </svg>
+            <svg class="filled" height="32" width="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H24V24H0z" fill="none"></path>
+                <path d="M16.5 3C19.538 3 22 5.5 22 9c0 7-7.5 11-10 12.5C9.5 20 2 16 2 9c0-3.5 2.5-6 5.5-6C9.36 3 11 4 12 5c1-1 2.64-2 4.5-2z"></path>
+            </svg>
+            Aç Bakalım
+        </button>
 
-    <p id="error-msg">Yanlış oldu kanka, bir daha dene! 🤨</p>
+        <p id="error-msg">YANLIŞ OLDU, BİR DAHA DENE! 🤨</p>
+    </div>
 </div>
 
 <script>
@@ -115,20 +187,25 @@
         const inputCont = document.getElementById('input-container');
 
         if (pass === "05.02.2025") { 
+            // Başarılı Giriş: Ekranı yavaşça kaybet ve beyazlat (Canva'ya Geçiş)
             error.style.display = 'none';
             screen.classList.add('fade-out');
             document.body.style.backgroundColor = "white";
             
             setTimeout(() => {
+                // BURAYA KENDİ CANVA LİNKİNİ YAPIŞTIR
                 window.location.href = "https://niluferim.my.canva.site/"; 
             }, 800);
         } else {
+            // Hatalı Giriş: Sallanma efekti ve retro mesaj
             error.style.display = 'block';
             inputCont.classList.add('shake');
+            
             setTimeout(() => {
                 inputCont.classList.remove('shake');
             }, 400);
-            document.getElementById('passInput').value = ""; 
+            
+            document.getElementById('passInput').value = ""; // Kutuyu temizle
         }
     }
 </script>
