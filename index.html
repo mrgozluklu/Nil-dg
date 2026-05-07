@@ -6,84 +6,62 @@
     <title>Sana Bir Sürprizim Var ❤️</title>
     <style>
         body { font-family: 'Arial', sans-serif; background-color: #fce4ec; text-align: center; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; transition: background-color 0.8s ease; }
-        #password-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ff80ab; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: transform 0.8s ease-in-out, opacity 0.8s ease; }
+        #password-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #2b0b1a; /* Daha koyu yaptık ki neon parlasın */ display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: transform 0.8s ease-in-out, opacity 0.8s ease; }
         
-        input { padding: 15px; border-radius: 10px; border: 2px solid transparent; font-size: 1.2rem; margin-top: 10px; text-align: center; transition: border 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        input:focus { outline: none; border: 2px solid #c51162; }
+        /* NEON YAZI EFECTI */
+        .neon-title {
+            color: #fff;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 21px #fff,
+                0 0 42px #ff00de,
+                0 0 82px #ff00de,
+                0 0 92px #ff00de,
+                0 0 102px #ff00de,
+                0 0 151px #ff00de;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #fff, 0 0 40px #ff00de, 0 0 80px #ff00de, 0 0 90px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+            }
+            20%, 24%, 55% { text-shadow: none; }
+        }
+
+        input { padding: 15px; border-radius: 10px; border: 2px solid transparent; font-size: 1.2rem; margin-top: 10px; text-align: center; transition: border 0.3s; background: rgba(255, 255, 255, 0.9); }
+        input:focus { outline: none; border: 2px solid #ff00de; }
         
-        /* UIVERSE BUTON TASARIMI */
         .uiverse-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          padding: 12px 25px;
-          margin-top: 20px;
-          background-color: #c51162;
-          color: white;
-          border: none;
-          border-radius: 12px;
-          cursor: pointer;
-          font-weight: bold;
-          font-size: 1.1rem;
-          transition: all 0.3s ease;
-          position: relative;
-          overflow: hidden;
-          box-shadow: 0 4px 15px rgba(197, 17, 98, 0.3);
+          display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 25px; margin-top: 20px; background-color: #ff00de; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(255, 0, 222, 0.4);
         }
 
-        .uiverse-btn svg {
-          fill: white;
-          transition: all 0.3s ease;
-        }
+        .uiverse-btn:hover { background-color: white; color: #ff00de; transform: translateY(-3px); box-shadow: 0 0 25px rgba(255, 0, 222, 0.6); }
+        .uiverse-btn svg { fill: white; transition: all 0.3s ease; }
+        .uiverse-btn:hover .filled { display: block; fill: #ff00de; animation: pulse 0.6s infinite alternate; }
+        .uiverse-btn .filled { display: none; }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.2); } }
 
-        .uiverse-btn .filled {
-          display: none;
-        }
-
-        .uiverse-btn:hover {
-          background-color: white;
-          color: #c51162;
-          transform: translateY(-3px);
-          box-shadow: 0 6px 20px rgba(197, 17, 98, 0.4);
-        }
-
-        .uiverse-btn:hover .empty {
-          display: none;
-        }
-
-        .uiverse-btn:hover .filled {
-          display: block;
-          fill: #c51162;
-          animation: pulse 0.6s infinite alternate;
-        }
-
-        @keyframes pulse {
-          from { transform: scale(1); }
-          to { transform: scale(1.2); }
-        }
-
-        #error-msg { color: #880e4f; font-weight: bold; margin-top: 15px; display: none; }
-        
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            50% { transform: translateX(10px); }
-            75% { transform: translateX(-10px); }
-            100% { transform: translateX(0); }
-        }
+        #error-msg { color: #ff00de; font-weight: bold; margin-top: 15px; display: none; text-shadow: 0 0 5px #ff00de; }
+        @keyframes shake { 0% { transform: translateX(0); } 25% { transform: translateX(-10px); } 50% { transform: translateX(10px); } 75% { transform: translateX(-10px); } 100% { transform: translateX(0); } }
         .shake { animation: shake 0.4s ease-in-out; }
         .fade-out { opacity: 0; transform: scale(1.1); }
-        h1 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
-<div id="password-screen">
-    <h1>Giriş Yap Bakalım!</h1>
-    <p style="color: white;">Sadece bizim bildiğimiz o özel tarih? ❤️</p>
+<audio id="bgMusic" loop>
+    <source src="sarki.mp3" type="audio/mpeg">
+    </audio>
+
+<div id="password-screen" onclick="playMusic()">
+    <h1 class="neon-title">Giriş Yap Bakalım!</h1>
+    <p style="color: white; opacity: 0.8;">Sadece bizim bildiğimiz o özel tarih? ❤️</p>
     <div id="input-container">
-        <input type="text" id="passInput" placeholder="GG.AA.YYYY" onkeypress="handleKeyPress(event)">
+        <input type="text" id="passInput" placeholder="GG.AA.YYYY" onkeypress="handleKeyPress(event)" oninput="playMusic()">
     </div>
     
     <button class="uiverse-btn" onclick="checkPass()">
@@ -102,6 +80,16 @@
 </div>
 
 <script>
+    let musicStarted = false;
+
+    function playMusic() {
+        if (!musicStarted) {
+            const audio = document.getElementById('bgMusic');
+            audio.play().catch(e => console.log("Müzik başlatılamadı:", e));
+            musicStarted = true;
+        }
+    }
+
     function handleKeyPress(event) {
         if (event.key === "Enter") {
             checkPass();
@@ -109,6 +97,7 @@
     }
 
     function checkPass() {
+        playMusic(); // Garanti olsun diye butona basınca da çalmayı dene
         const pass = document.getElementById('passInput').value;
         const screen = document.getElementById('password-screen');
         const error = document.getElementById('error-msg');
