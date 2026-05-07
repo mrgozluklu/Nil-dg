@@ -5,58 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sana Bir Sürprizim Var ❤️</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #fce4ec; text-align: center; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; }
-        #password-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ff80ab; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: 0.5s; }
-        input { padding: 15px; border-radius: 10px; border: none; font-size: 1.2rem; margin-top: 10px; text-align: center; }
-        button { padding: 10px 20px; margin-top: 10px; background: #c51162; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        #main-content { display: none; padding: 20px; overflow-y: auto; height: 100vh; width: 100%; }
-        .card { background: white; padding: 20px; margin: 20px auto; border-radius: 15px; max-width: 400px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor: pointer; transition: 0.3s; }
-        .card:hover { transform: scale(1.05); }
-        .hidden-note { display: none; margin-top: 10px; color: #ad1457; font-style: italic; }
-        h1 { color: #c51162; }
+        body { font-family: 'Arial', sans-serif; background-color: #fce4ec; text-align: center; margin: 0; display: flex; align-items: center; justify-content: center; height: 100vh; overflow: hidden; transition: background-color 0.8s ease; }
+        #password-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ff80ab; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: transform 0.8s ease-in-out, opacity 0.8s ease; }
+        input { padding: 15px; border-radius: 10px; border: 2px solid transparent; font-size: 1.2rem; margin-top: 10px; text-align: center; transition: border 0.3s; }
+        input:focus { outline: none; border: 2px solid #c51162; }
+        button { padding: 10px 25px; margin-top: 15px; background: #c51162; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: transform 0.2s; }
+        button:active { transform: scale(0.9); }
+        
+        /* Hata Mesajı Stili */
+        #error-msg { color: #880e4f; font-weight: bold; margin-top: 15px; display: none; }
+        
+        /* Sallanma Animasyonu (Shake) */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+        .shake { animation: shake 0.4s ease-in-out; }
+
+        /* Geçiş Efekti İçin Beyaz Ekran */
+        .fade-out { opacity: 0; transform: scale(1.1); }
+        h1 { color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
 <div id="password-screen">
     <h1>Giriş Yap Bakalım!</h1>
-    <p>Sadece bizim bildiğimiz o özel tarih? (Örn: 01.01.2020)</p>
-    <input type="password" id="passInput" placeholder="Şifreyi Gir...">
+    <p style="color: white;">Sadece bizim bildiğimiz o özel tarih? ❤️</p>
+    <div id="input-container">
+        <input type="text" id="passInput" placeholder="GG.AA.YYYY" onkeypress="handleKeyPress(event)">
+    </div>
     <button onclick="checkPass()">Aç Bakalım</button>
-</div>
-
-<div id="main-content">
-    <h1>İyi Ki Doğdun Hatun! ❤️</h1>
-    <p>Bu site sadece senin için, sana özel yapıldı.</p>
-    
-    <div class="card" onclick="toggleNote(this)">
-        <h3>🎁 Kutuyu Tıkla</h3>
-        <p class="hidden-note">İçindeki Not: Seninle geçen her gün benim için bir hediye. Seni çok seviyorum!</p>
-    </div>
-
-    <div class="card" onclick="toggleNote(this)">
-        <h3>📸 İlk Fotoğrafımız</h3>
-        <p class="hidden-note">Hala o günkü gibi bakıyorum sana... (Buraya fotoğraf linki de ekleyebilirsin)</p>
-    </div>
-
-    <div class="card" onclick="toggleNote(this)">
-        <h3>🍕 En Sevdiğin Yemek</h3>
-        <p class="hidden-note">Söz veriyorum, bu akşam ne istersen o! Kuponun burada.</p>
-    </div>
+    <p id="error-msg">Yanlış oldu, bir daha dene! 🤨</p>
 </div>
 
 <script>
-function checkPass() {
+    function handleKeyPress(event) {
+        if (event.key === "Enter") {
+            checkPass();
+        }
+    }
+
+    function checkPass() {
         const pass = document.getElementById('passInput').value;
-        // ŞİFRE DOĞRUYSA CANVA SİTESİNE IŞINLA:
+        const screen = document.getElementById('password-screen');
+        const error = document.getElementById('error-msg');
+        const inputCont = document.getElementById('input-container');
+
         if (pass === "05.02.2025") { 
-            document.getElementById('password-screen').style.opacity = '0';
+            // Başarılı Giriş: Ekranı yavaşça kaybet ve beyazlat
+            error.style.display = 'none';
+            screen.classList.add('fade-out');
+            document.body.style.backgroundColor = "white";
+            
             setTimeout(() => {
-                // BURAYA KENDİ CANVA LİNKİNİ YAPIŞTIR:
                 window.location.href = "https://niluferim.my.canva.site/"; 
-            }, 500);
+            }, 800);
         } else {
-            alert("Yanlış şifre, bir daha düşün!");
+            // Hatalı Giriş: Sallanma efekti ve mesaj
+            error.style.display = 'block';
+            inputCont.classList.add('shake');
+            
+            // Animasyon bitince klasörü kaldır ki tekrar sallasın
+            setTimeout(() => {
+                inputCont.classList.remove('shake');
+            }, 400);
+            
+            document.getElementById('passInput').value = ""; // Kutuyu temizle
         }
     }
 </script>
